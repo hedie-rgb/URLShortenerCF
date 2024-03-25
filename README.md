@@ -51,7 +51,7 @@ This file is a view to add a new URL in our table. The URL will not be added if 
 
 This is the file containing all the logic to implement the shortening process of URLs. It contains 3 functions:
 - generateShortURL:
-  - All short URLs will start with https://short.en/ and then 4 random letters or numbers witll be added to the end of the string. To ensure each short URL is unique, we will add the id of the future row to the newly generated short link. This function will return the created short URL.
+  - All short URLs will start with https://short.en/ and then 4 random letters or numbers will be added to the end of the string. To ensure each short URL is unique, we will add the id of the future row to the newly generated short link. This function will return the created short URL.
 - insertURL:
   - Each time that a new entry needs to be added, first we would check if it already exists in the database, if yes, then the short URL associated with it and the appropriate message will be returned.
   - If the previous scenario didn't happen we will try to insert the new entry. If this action was successful, then the newly generated short URL associated with it and the appropriate message will be returned.
