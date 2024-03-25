@@ -29,3 +29,32 @@ I used VSCode as an IDE. VSCode has an extension to build and run Coldfusion pro
 - Open the project settings and in the Coldfusion Server Settings section, set your local development server as localhost.
 
 ## Set up database
+
+- I used Apache Derby as my database. You need to launch Coldfusion Administartor by right clicking on the server name and choosing the option.
+- You need to login by the username and password you first chose while adding the server.
+- Add a new datasource by the name URLShortenerAPI and choose Apache Derby Embedded from the driver dropdown.
+- Use URLShortenerAPI for the Database Folder (same as the data source name), and create a database.
+
+## Create the urls table
+
+You need to run the db.cfm file to make a simple table with the columns, id, link and shortlink. Id is used to make unique short links.
+
+## index.cfm
+
+This file is a view to list all the existing entries in the database and a button to add new URL. Each short URL shown on this page will redirect you to the associated URL to it.
+
+## create.cfm
+
+This file is a view to add a new URL in our table. The URL will not be added if it already exists in the database.
+
+## API.Content.cfc
+
+This is the file containing all the logic to implement the shortening process of URLs. It contains 3 functions:
+- generateShortURL:
+  - All short URLs will start with https://short.en/ and then 4 random letters or numbers witll be added to the end of the string. To ensure each short URL is unique, we will add the id of the future row to the newly generated short link. This function will return the created short URL.
+- insertURL:
+  - Each time that a new entry needs to be added, first we would check if it already exists in the database, if yes, then the short URL associated with it and the appropriate message will be returned.
+  - If the previous scenario didn't happen we will try to insert the new entry. If this action was successful, then the newly generated short URL associated with it and the appropriate message will be returned.
+  - If any unpredicted errors happened, an empty string and the appropriate message will be returned.
+- getLink:
+  - This function will return the URL associated with the a short link.
